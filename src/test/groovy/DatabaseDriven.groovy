@@ -17,21 +17,36 @@
 import groovy.sql.Sql
 import spock.lang.Shared
 import spock.lang.Specification
+import spock.lang.Unroll
 
+//@Unroll
 class DatabaseDriven extends Specification {
-  @Shared sql = Sql.newInstance("jdbc:h2:mem:", "org.h2.Driver")
-  
-  // insert data (usually the database would already contain the data)
-  def setupSpec() {
-    sql.execute("create table maxdata (id int primary key, a int, b int, c int)")
-    sql.execute("insert into maxdata values (1, 3, 7, 7), (2, 5, 4, 5), (3, 9, 9, 9)")
-  }
+    @Shared sql = Sql.newInstance("jdbc:h2:mem:", "org.h2.Driver")
 
-  def "maximum of two numbers"() {
-    expect:
-    Math.max(a, b) == c
+    // insert data (usually the database would already contain the data)
+    def setupSpec() {
+        sql.execute("create table maxdata (id int primary key, a int, b int, c int)")
+        sql.execute("insert into maxdata values (1, 3, 7, 7), (2, 5, 4, 5), (3, 9, 9, 9)")
+    }
 
-    where:
-    [a, b, c] << sql.rows("select a, b, c from maxdata")
-  }
+    def "maximum of two numbers from a table"() {
+        expect:
+        Math.max(a, b) == c
+
+        where:
+        [a, b, c] << sql.rows("select a, b, c from maxdata")
+    }
+
+    def "maximum of two numbers inline table"() {
+        expect:
+        Math.max(a, b) == c
+
+        where:
+        a | b | c
+        3 | 7 | 3
+        5 | 4 | 5
+        9 | 9 | 9
+    }
+
+
 }

@@ -13,7 +13,8 @@
  */
 
 import spock.lang.Specification
-
+import static org.hamcrest.CoreMatchers.equalTo
+import static org.junit.Assert.assertThat
 import static spock.util.matcher.HamcrestMatchers.closeTo
 
 /**
@@ -26,10 +27,25 @@ import static spock.util.matcher.HamcrestMatchers.closeTo
  * @since 0.5
  */
 class HamcrestMatchers extends Specification {
-  def "comparing two decimal numbers"() {
-    def myPi = 3.14
+    def "comparing two decimal numbers"() {
+        def myPi = 3.14
 
-    expect:
-    myPi closeTo(Math.PI, 0.01)
-  }
+        expect:
+        myPi closeTo(Math.PI, 0.01)
+    }
+
+    def "should be the same dog"() {
+        Dog me = new Dog(name: "Ralf")
+        Dog theOther = new Dog(name: "Ralf")
+
+        expect:
+        me == theOther
+    }
+
+    def "should have fixed size numbers"() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+        expect:
+        assertThat(numbers.size() as Integer, is(equalTo(5)));
+    }
 }
