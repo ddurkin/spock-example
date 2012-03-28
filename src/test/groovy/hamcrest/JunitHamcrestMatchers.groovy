@@ -36,15 +36,15 @@ class JunitHamcrestMatchers {
 
     @Test
     public void shouldBeTheSamePerson() {
-        Dog me = new Dog(name: "Ralf");
-        Dog theOther = new Dog(name: "Ralf");
-        assertThat(me, is(theOther));
+        Object me = new Dog(name: "Ralf");
+        Object theOther = new Dog(name: "Ralf");
+        assertThat(me, equalTo(theOther))
     }
 
     @Test
     public void shouldHaveFixedSizeNumbers() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
-        assertThat(numbers.size(), is(equalTo(5)));
+        assertThat(numbers.size(), equalTo(5));
     }
 
 

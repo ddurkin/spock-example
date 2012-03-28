@@ -19,6 +19,7 @@ import spock.lang.Specification
 import static org.hamcrest.CoreMatchers.equalTo
 
 import static spock.util.matcher.HamcrestMatchers.closeTo
+import static org.junit.Assert.assertThat
 
 /**
  * Some examples of Spock use of Hamcrest Matchers
@@ -37,14 +38,14 @@ class SpockHamcrestMatchers extends Specification {
         Dog theOther = new Dog(name: "Ralf")
 
         expect:
-        me is(theOther)
+        me equalTo(theOther)
     }
 
     def "should have fixed size numbers"() {
         List<Integer> numbers = [1, 2, 3, 4, 5]
 
         expect:
-        (numbers.size() as Integer) is(equalTo(5))
+        assertThat(numbers.size(), equalTo(5))
         numbers.size() == 5
     }
 }

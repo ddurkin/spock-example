@@ -43,7 +43,7 @@ class DatabaseDriven extends Specification {
 
         where:
         a | b | c
-        3 | 7 | 3
+        3 | 7 | 7
         5 | 4 | 5
         9 | 9 | 9
     }
