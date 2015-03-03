@@ -20,5 +20,6 @@ bin/
 *.iws
 *.ipr
 *.iml
+.idea/
 out/
 atlassian-ide-plugin.xml
